@@ -21,11 +21,30 @@ namespace UndergroundConnectionsApi.Controllers
     }
 
     // GET api/artists
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<Artist>>> Get()
+
+      [HttpGet]
+    public async Task<ActionResult<IEnumerable<Artist>>> Get(string name, int age, string email, string seeking)
     {
-      return await _db.Artists.ToListAsync();
+      var query = _db.Artists.AsQueryable();
+      if (name != null)
+      {
+        query = query.Where(e => e.Name == name);
+      }
+      if (age > 0)
+      {
+        query = query.Where(e => e.Age == age);
+      }
+      if (email != null)
+      {
+        query = query.Where(e => e.Email == email);
+      }
+      if (seeking!= null)
+      {
+        query = query.Where(e => e.Seeking == seeking);
+      }
+      return await query.ToListAsync();
     }
+
 
     // POST api/artists
     [HttpPost]

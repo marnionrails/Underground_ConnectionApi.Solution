@@ -25,6 +25,10 @@ namespace UndergroundConnectionsApi.Models
               new Artist { ArtistId = 11, Name = "Dusty Hogg", Age = 36, Email = "biker@yomama.com", Bio = "Don't mess with me or I will punch your lights out", Seeking = "Rappers", PastWork = "I beat the shit out of people" },
               new Artist { ArtistId = 12, Name = "Meera Lax", Age = 32, Email = "psychicmeera@yomama.com", Bio = "I will predict your future by connecting with the spirits", Seeking = "Painters", PastWork = "I helped many find their spiritual purposes." }
           );
+          builder.Entity<Classification>()
+          .HasData(
+              new Classification { ClassificationId = 1, ClassificationName = "Singer", ClassificationSpecification = "Country"}
+          );
     }
     public DbSet<Artist> Artists { get; set; }
     public DbSet<Classification> Classifications { get; set; }

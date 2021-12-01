@@ -23,7 +23,7 @@ namespace UndergroundConnectionsApi.Controllers
     // GET api/artists
 
       [HttpGet]
-    public async Task<ActionResult<IEnumerable<Artist>>> Get(string name, int age, string email, string seeking)
+    public async Task<ActionResult<IEnumerable<Artist>>> Get(string name, int age, string email, string seeking, string pastWork)
     {
       var query = _db.Artists.AsQueryable();
       if (name != null)
@@ -41,6 +41,10 @@ namespace UndergroundConnectionsApi.Controllers
       if (seeking!= null)
       {
         query = query.Where(e => e.Seeking == seeking);
+      }
+      if (pastWork!= null)
+      {
+        query = query.Where(e => e.PastWork == pastWork);
       }
       return await query.ToListAsync();
     }
